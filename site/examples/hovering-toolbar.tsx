@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react'
-import { Slate, Editable, ReactEditor, withReact, useSlate } from 'slate-react'
+import { Slate, Editable, ReactEditor, withReact, useSlate } from '../../packages/dropdeck-slate-react'
 import { Editor, Transforms, Text, createEditor, Node } from 'slate'
 import { css } from 'emotion'
 import { withHistory } from 'slate-history'

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import isHotkey from 'is-hotkey'
-import { Editable, withReact, useSlate, Slate } from 'slate-react'
+import { Editable, withReact, useSlate, Slate } from '../../packages/dropdeck-slate-react'
 import { Editor, Transforms, createEditor, Node } from 'slate'
 import { withHistory } from 'slate-history'
 

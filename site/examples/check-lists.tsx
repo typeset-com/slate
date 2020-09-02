@@ -6,7 +6,7 @@ import {
   useEditor,
   useReadOnly,
   ReactEditor,
-} from 'slate-react'
+} from '../../packages/dropdeck-slate-react'
 import { Node, Editor, Transforms, Range, Point, createEditor } from 'slate'
 import { css } from 'emotion'
 import { withHistory } from 'slate-history'

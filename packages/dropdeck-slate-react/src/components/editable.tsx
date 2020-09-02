@@ -157,8 +157,11 @@ export const Editable = (props: EditableProps) => {
       return
     }
 
+    const newDomRange = selection && ReactEditor.toDOMRange(editor, selection)
+
     // verify that the dom selection is in the editor
     const editorElement = EDITOR_TO_ELEMENT.get(editor)!
+
     let hasDomSelectionInEditor = false
     if (
       editorElement.contains(domSelection.anchorNode) &&
@@ -172,7 +175,9 @@ export const Editable = (props: EditableProps) => {
       hasDomSelection &&
       hasDomSelectionInEditor &&
       selection &&
-      Range.equals(ReactEditor.toSlateRange(editor, domSelection), selection)
+      newDomRange &&
+      isRangeEqual(domSelection.getRangeAt(0), newDomRange)
+      // Range.equals(ReactEditor.toSlateRange(editor, domSelection), selection)
     ) {
       return
     }
@@ -182,7 +187,6 @@ export const Editable = (props: EditableProps) => {
     state.isUpdatingSelection = true
     domSelection.removeAllRanges()
 
-    const newDomRange = selection && ReactEditor.toDOMRange(editor, selection)
 
     if (newDomRange) {
       if (Range.isBackward(selection!)) {

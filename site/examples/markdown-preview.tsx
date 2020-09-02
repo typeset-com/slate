@@ -1,6 +1,6 @@
 import Prism from 'prismjs'
 import React, { useState, useCallback, useMemo } from 'react'
-import { Slate, Editable, withReact } from 'slate-react'
+import { Slate, Editable, withReact } from '../../packages/dropdeck-slate-react'
 import { Node, Text, createEditor } from 'slate'
 import { withHistory } from 'slate-history'
 import { css } from 'emotion'

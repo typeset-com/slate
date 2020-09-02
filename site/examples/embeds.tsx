@@ -8,7 +8,7 @@ import {
   ReactEditor,
   useFocused,
   useSelected,
-} from 'slate-react'
+} from '../../packages/dropdeck-slate-react'
 
 const EmbedsExample = () => {
   const [value, setValue] = useState<Node[]>(initialValue)

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { Node, createEditor } from 'slate'
-import { Slate, Editable, withReact } from 'slate-react'
+import { Slate, Editable, withReact } from '../../packages/dropdeck-slate-react'
 import { withHistory } from 'slate-history'
 
 const PlainTextExample = () => {

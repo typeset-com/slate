@@ -4,7 +4,7 @@ import 'prismjs/components/prism-php'
 import 'prismjs/components/prism-sql'
 import 'prismjs/components/prism-java'
 import React, { useState, useCallback, useMemo } from 'react'
-import { Slate, Editable, withReact } from 'slate-react'
+import { Slate, Editable, withReact } from '../../packages/dropdeck-slate-react'
 import { Text, createEditor, Node } from 'slate'
 import { withHistory } from 'slate-history'
 import { css } from 'emotion'
@@ -99,7 +99,7 @@ const Leaf = ({ attributes, children, leaf }) => {
         ${leaf.comment &&
           css`
             color: slategray;
-          `} 
+          `}
 
         ${(leaf.operator || leaf.url) &&
           css`

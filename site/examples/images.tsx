@@ -9,7 +9,7 @@ import {
   useSelected,
   useFocused,
   withReact,
-} from 'slate-react'
+} from '../../packages/dropdeck-slate-react'
 import { withHistory } from 'slate-history'
 import { css } from 'emotion'
 
