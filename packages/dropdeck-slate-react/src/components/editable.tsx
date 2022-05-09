@@ -19,6 +19,8 @@ import {
   IS_SAFARI,
   IS_EDGE_LEGACY,
   IS_CHROME_LEGACY,
+  IS_FIREFOX_LEGACY,
+  IS_IOS,
 } from '../utils/environment'
 import { ReactEditor } from '..'
 import { ReadOnlyContext } from '../hooks/use-read-only'
@@ -186,7 +188,6 @@ export const Editable = (props: EditableProps) => {
     const el = ReactEditor.toDOMNode(editor, editor)
     state.isUpdatingSelection = true
     domSelection.removeAllRanges()
-
 
     if (newDomRange) {
       if (Range.isBackward(selection!)) {
@@ -606,7 +607,7 @@ export const Editable = (props: EditableProps) => {
               // aren't correct and never fire the "insertFromComposition"
               // type that we need. So instead, insert whenever a composition
               // ends since it will already have been committed to the DOM.
-              if (!IS_SAFARI && !IS_FIREFOX && event.data) {
+              if (!IS_SAFARI && !IS_FIREFOX_LEGACY && !IS_IOS && event.data) {
                 Editor.insertText(editor, event.data)
               }
             }
