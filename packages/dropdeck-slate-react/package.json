@@ -1,7 +1,7 @@
 {
   "name": "dropdeck-slate-react",
   "description": "Tools for building completely customizable richtext editors with React.",
-  "version": "0.58.4d",
+  "version": "0.58.4e",
   "license": "MIT",
   "repository": "git://github.com/dropdeck-com/slate.git",
   "main": "dist/index.js",

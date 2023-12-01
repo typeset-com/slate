@@ -1,6 +1,6 @@
-import { Editor, Node, Path, Point, Range, Transforms, Descendant } from 'slate'
+import {Editor, Node, Path, Point, Range, Transforms} from 'slate'
 
-import { Key } from '../utils/key'
+import {Key} from '../utils/key'
 import {
   EDITOR_TO_ELEMENT,
   ELEMENT_TO_NODE,
@@ -32,6 +32,21 @@ export interface ReactEditor extends Editor {
 }
 
 export const ReactEditor = {
+
+  findDocumentOrShadowRoot: (editor: ReactEditor): Document | ShadowRoot | null => {
+    const el = ReactEditor.toDOMNode(editor, editor)
+    const root = el.getRootNode()
+
+    if (
+      (root instanceof Document || root instanceof ShadowRoot) &&
+      root.getSelection != null
+    ) {
+      return root
+    }
+
+    return el.ownerDocument
+  },
+
   /**
    * Find a key for a Slate node.
    */
@@ -115,11 +130,30 @@ export const ReactEditor = {
    */
 
   focus(editor: ReactEditor): void {
-    const el = ReactEditor.toDOMNode(editor, editor)
-    IS_FOCUSED.set(editor, true)
+    // Return if already focused
+    if (IS_FOCUSED.get(editor)) {
+      return
+    }
 
-    if (window.document.activeElement !== el) {
+    const el = ReactEditor.toDOMNode(editor, editor)
+    const root = ReactEditor.findDocumentOrShadowRoot(editor)
+    if (root && root.activeElement !== el) {
+      // Ensure that the DOM selection state is set to the editor's selection
+      if (editor.selection && root instanceof Document) {
+        const domSelection = root.getSelection()
+        const domRange = ReactEditor.toDOMRange(editor, editor.selection)
+        if (domSelection && domRange) {
+          domSelection.removeAllRanges()
+          domSelection.addRange(domRange)
+        }
+      }
+      // Create a new selection in the top of the document if missing
+      if (!editor.selection) {
+        Transforms.select(editor, Editor.start(editor, []))
+        editor.onChange()
+      }
       el.focus({ preventScroll: true })
+      IS_FOCUSED.set(editor, true)
     }
   },
 
