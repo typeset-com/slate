@@ -130,33 +130,13 @@ export const ReactEditor = {
    */
 
   focus(editor: ReactEditor): void {
-    // Return if already focused
-    if (IS_FOCUSED.get(editor)) {
-      return
-    }
-
     const el = ReactEditor.toDOMNode(editor, editor)
-    const root = ReactEditor.findDocumentOrShadowRoot(editor)
-    if (root && root.activeElement !== el) {
-      // Ensure that the DOM selection state is set to the editor's selection
-      if (editor.selection && root instanceof Document) {
-        const domSelection = root.getSelection()
-        const domRange = ReactEditor.toDOMRange(editor, editor.selection)
-        if (domSelection && domRange) {
-          domSelection.removeAllRanges()
-          domSelection.addRange(domRange)
-        }
-      }
-      // Create a new selection in the top of the document if missing
-      if (!editor.selection) {
-        Transforms.select(editor, Editor.start(editor, []))
-        editor.onChange()
-      }
+    IS_FOCUSED.set(editor, true)
+
+    if (window.document.activeElement !== el) {
       el.focus({ preventScroll: true })
-      IS_FOCUSED.set(editor, true)
     }
   },
-
   /**
    * Deselect the editor.
    */
