@@ -33,20 +33,6 @@ export interface ReactEditor extends Editor {
 
 export const ReactEditor = {
 
-  findDocumentOrShadowRoot: (editor: ReactEditor): Document | ShadowRoot | null => {
-    const el = ReactEditor.toDOMNode(editor, editor)
-    const root = el.getRootNode()
-
-    if (
-      (root instanceof Document || root instanceof ShadowRoot) &&
-      root.getSelection != null
-    ) {
-      return root
-    }
-
-    return el.ownerDocument
-  },
-
   /**
    * Find a key for a Slate node.
    */
